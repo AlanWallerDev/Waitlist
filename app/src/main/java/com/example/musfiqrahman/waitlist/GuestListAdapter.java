@@ -1,5 +1,6 @@
 package com.example.musfiqrahman.waitlist;
 
+import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,11 @@ import java.util.List;
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.NumberViewHolder>  {
 
     private int mNumberItems;
+    private Cursor cursor;
 
-    public GuestListAdapter(int mNumberItems) {
+    public GuestListAdapter(int mNumberItems, Cursor cursor) {
         this.mNumberItems = mNumberItems;
+        this.cursor = cursor;
     }
 
     public NumberViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){
@@ -27,7 +30,9 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Numb
 
         View thisItemsView = myInflater.inflate(R.layout.guest_item_list, parent, false);
 
-        return new NumberViewHolder(thisItemsView);
+
+
+        return new NumberViewHolder(thisItemsView, cursor);
     }
 
     @Override
@@ -45,13 +50,19 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Numb
 
     class NumberViewHolder extends RecyclerView.ViewHolder{
         TextView listNumberView;
-        public NumberViewHolder(View itemView) {
+        TextView partySizeView;
+        Cursor cursor;
+        public NumberViewHolder(View itemView, Cursor cursor) {
             super(itemView);
             listNumberView = (TextView) itemView.findViewById(R.id.name_text_view);
+            partySizeView = (TextView) itemView.findViewById(R.id.party_size_text_view);
+            this.cursor = cursor;
         }
 
         void bind(int index){
-            listNumberView.setText(index + "");
+            cursor.move(index);
+            listNumberView.setText(cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_NAME)));
+            partySizeView.setText(cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_PARTYSIZE)));
         }
     }
 
