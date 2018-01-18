@@ -67,7 +67,6 @@ public class DBAdapter {
                     + " (" + KEY_ROWID + " integer primary key autoincrement, "
                     + KEY_NAME         + " text not null, "
                     + KEY_PARTYSIZE   + " integer not null "
-                  //  + KEY_FAVCOLOUR    + " string not null"
                     + ");";
 
     // Context of application who uses us.
@@ -106,7 +105,6 @@ public class DBAdapter {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_NAME, name);
         initialValues.put(KEY_PARTYSIZE, studentNum);
-       // initialValues.put(KEY_FAVCOLOUR, favColour);
 
         // Insert it into the database.
         return db.insert(DATABASE_TABLE, null, initialValues);
@@ -163,7 +161,6 @@ public class DBAdapter {
         ContentValues newValues = new ContentValues();
         newValues.put(KEY_NAME, name);
         newValues.put(KEY_PARTYSIZE, studentNum);
-       // newValues.put(KEY_FAVCOLOUR, favColour);
 
         // Insert it into the database.
         return db.update(DATABASE_TABLE, newValues, where, null) != 0;
