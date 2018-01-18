@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static DBAdapter myDB;
 
-    private static final int NUM_GUESTS = 100;
+    private static int NUM_GUESTS = 0;
 
     GuestListAdapter mAdapter;
 
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         if(cursor.moveToFirst()) cursor.moveToFirst();
         try {
             do {
+                NUM_GUESTS++;
                 String n = cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_NAME));
                 int size = cursor.getInt(cursor.getColumnIndex(DBAdapter.KEY_PARTYSIZE));
                 GuestInfo g = new GuestInfo(n, size);
