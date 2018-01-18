@@ -17,11 +17,9 @@ import java.util.List;
 public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.NumberViewHolder>  {
 
     private int mNumberItems;
-    private Cursor cursor;
 
     public GuestListAdapter(int mNumberItems, Cursor cursor) {
         this.mNumberItems = mNumberItems;
-        this.cursor = cursor;
     }
 
     public NumberViewHolder onCreateViewHolder(final ViewGroup parent, int viewType){
@@ -32,12 +30,21 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Numb
 
 
 
-        return new NumberViewHolder(thisItemsView, cursor);
+        return new NumberViewHolder(thisItemsView);
     }
 
     @Override
     public void onBindViewHolder(NumberViewHolder holder, int position) {
-        holder.bind(position);
+    try {
+        Cursor cursor = MainActivity.myDB.getAllRows();
+        cursor.move(position);
+        String name = cursor.getString(cursor.getColumnIndex(MainActivity.myDB.KEY_NAME));
+        int partySize = cursor.getInt(cursor.getColumnIndex(MainActivity.myDB.KEY_PARTYSIZE));
+        holder.bind(name, partySize);
+    }catch(Exception e){
+        e.printStackTrace();
+    }
+
     }
 
     @Override
@@ -50,19 +57,16 @@ public class GuestListAdapter extends RecyclerView.Adapter<GuestListAdapter.Numb
 
     class NumberViewHolder extends RecyclerView.ViewHolder{
         TextView listNumberView;
-        TextView partySizeView;
-        Cursor cursor;
-        public NumberViewHolder(View itemView, Cursor cursor) {
+        TextView partyTextView;
+        public NumberViewHolder(View itemView) {
             super(itemView);
             listNumberView = (TextView) itemView.findViewById(R.id.name_text_view);
-            partySizeView = (TextView) itemView.findViewById(R.id.party_size_text_view);
-            this.cursor = cursor;
+            partyTextView = (TextView) itemView.findViewById(R.id.party_size_text_view);
         }
 
-        void bind(int index){
-            cursor.move(index);
-            listNumberView.setText(cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_NAME)));
-            partySizeView.setText(cursor.getString(cursor.getColumnIndex(DBAdapter.KEY_PARTYSIZE)));
+        void bind(String str, int size){
+            listNumberView.setText(str);
+            partyTextView.setText(size + "");
         }
     }
 

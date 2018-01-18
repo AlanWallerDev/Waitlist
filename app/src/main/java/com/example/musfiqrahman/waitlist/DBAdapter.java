@@ -66,7 +66,7 @@ public class DBAdapter {
             "create table " + DATABASE_TABLE
                     + " (" + KEY_ROWID + " integer primary key autoincrement, "
                     + KEY_NAME         + " text not null, "
-                    + KEY_PARTYSIZE   + " integer not null, "
+                    + KEY_PARTYSIZE   + " integer not null "
                   //  + KEY_FAVCOLOUR    + " string not null"
                     + ");";
 
