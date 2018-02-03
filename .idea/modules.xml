@@ -3,7 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Waitlist.iml" filepath="$PROJECT_DIR$/Waitlist.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Alan\Documents\GitHub\Waitlist\Waitlist.iml" filepath="C:\Users\Alan\Documents\GitHub\Waitlist\Waitlist.iml" />
+      <module fileurl="file://C:\Users\Alan\Documents\GitHub\Waitlist\app\app.iml" filepath="C:\Users\Alan\Documents\GitHub\Waitlist\app\app.iml" />
     </modules>
   </component>
 </project>
